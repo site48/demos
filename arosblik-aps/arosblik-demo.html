@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arosblik ApS – Blikkenslager i Aarhus</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F7F4EF;
+    --white: #FFFFFF;
+    --ink: #1A1A18;
+    --ink-light: #4A4A46;
+    --accent: #D4611A;
+    --accent-light: #F5E6D8;
+    --border: #E2DDD6;
+    --section-bg: #F0EDE8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(247, 244, 239, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 1.25rem;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--ink-light);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    transition: opacity 0.2s !important;
+  }
+
+  .nav-cta:hover { opacity: 0.88; color: white !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 68px;
+  }
+
+  .hero-left {
+    padding: 80px 60px 80px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    width: fit-content;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--ink-light);
+    max-width: 420px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(212, 97, 26, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(212, 97, 26, 0.4);
+  }
+
+  .hero-phone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .hero-phone-icon {
+    width: 42px; height: 42px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+
+  .hero-phone-text small {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    font-weight: 400;
+  }
+
+  .hero-right {
+    background: var(--section-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(212,97,26,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-card {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 380px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-card-header {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .service-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: var(--ink-light);
+  }
+
+  .service-item:last-child { border-bottom: none; }
+
+  .service-check {
+    width: 24px; height: 24px;
+    background: var(--accent-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .hero-card-cta {
+    margin-top: 24px;
+    background: var(--accent);
+    color: white;
+    padding: 14px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .hero-card-cta:hover { opacity: 0.88; }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--ink);
+    padding: 20px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  /* SERVICES */
+  .services {
+    padding: 100px 80px;
+  }
+
+  .section-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .services h2, .why h2, .reviews h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    color: var(--ink-light);
+    font-size: 1rem;
+    max-width: 500px;
+    margin-bottom: 56px;
+    font-weight: 300;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .service-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  }
+
+  .service-icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+
+  .service-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    line-height: 1.65;
+  }
+
+  /* WHY */
+  .why {
+    background: var(--section-bg);
+    padding: 100px 80px;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 56px;
+    align-items: center;
+  }
+
+  .why-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .stat-box {
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    border: 1px solid var(--border);
+  }
+
+  .stat-number {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    font-weight: 400;
+  }
+
+  .why-points {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .why-point {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .why-point-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .why-point-text h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+
+  .why-point-text p {
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    line-height: 1.65;
+  }
+
+  /* REVIEWS */
+  .reviews {
+    padding: 100px 80px;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .review-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+  }
+
+  .review-stars {
+    color: #F5A623;
+    font-size: 1rem;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+  }
+
+  .review-text {
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .review-author {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+
+  .review-location {
+    font-size: 0.8rem;
+    color: var(--ink-light);
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--accent);
+    padding: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .cta-section h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: white;
+    margin-bottom: 12px;
+  }
+
+  .cta-section h2 em {
+    font-style: italic;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .cta-section p {
+    color: rgba(255,255,255,0.6);
+    margin-top: 12px;
+    font-weight: 300;
+  }
+
+  .btn-white {
+    background: white;
+    color: var(--ink);
+    padding: 18px 36px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-white:hover { transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: var(--section-bg);
+    padding: 40px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  .footer-contact {
+    font-size: 0.9rem;
+    color: var(--ink-light);
+  }
+
+  .footer-contact a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge { animation: fadeUp 0.5s ease both; }
+  h1 { animation: fadeUp 0.5s 0.1s ease both; }
+  .hero-sub { animation: fadeUp 0.5s 0.2s ease both; }
+  .hero-actions { animation: fadeUp 0.5s 0.3s ease both; }
+  .hero-card { animation: fadeUp 0.6s 0.2s ease both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 60px 24px; }
+    .services, .why, .reviews { padding: 60px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; gap: 40px; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .cta-section { padding: 60px 24px; flex-direction: column; }
+    .trust-bar { padding: 20px 24px; gap: 24px; }
+    footer { padding: 32px 24px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Arosblik<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Ydelser</a></li>
+    <li><a href="#om">Om os</a></li>
+    <li><a href="#anmeldelser">Anmeldelser</a></li>
+    <li><a href="#kontakt" class="nav-cta">Få et tilbud</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">Aarhus · Blikkenslager</div>
+    <h1>Din lokale<br><em>blikkenslager</em><br>du kan stole på</h1>
+    <p class="hero-sub">Arosblik ApS leverer professionelt blikkenslagersarbejde i Aarhus og omegn. Hurtig respons, fair priser og arbejde du er stolt af at vise frem.</p>
+    <div class="hero-actions">
+      <a href="#kontakt" class="btn-primary">
+        Få et gratis tilbud →
+      </a>
+      <a href="tel:21683826" class="hero-phone">
+        <div class="hero-phone-icon">📞</div>
+        <div class="hero-phone-text">
+          <strong>21 68 38 26</strong>
+          <small>Ring direkte</small>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hero-card-header">Hvad vi tilbyder</div>
+      <div class="service-item">
+        <div class="service-check">✓</div>
+        Tagarbejde & tagrenovering
+      </div>
+      <div class="service-item">
+        <div class="service-check">✓</div>
+        Tagrender & nedløbsrør
+      </div>
+      <div class="service-item">
+        <div class="service-check">✓</div>
+        Inddækninger & kviste
+      </div>
+      <div class="service-item">
+        <div class="service-check">✓</div>
+        Zink- & kobberarbejde
+      </div>
+      <div class="service-item">
+        <div class="service-check">✓</div>
+        Akut udbedring af lækager
+      </div>
+      <div class="hero-card-cta" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">
+        Få et gratis tilbud i dag
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span>⭐</span> 5-stjernet på Google</div>
+  <div class="trust-item"><span>🔒</span> Fuldt forsikret</div>
+  <div class="trust-item"><span>⚡</span> Hurtig respons</div>
+  <div class="trust-item"><span>📍</span> Lokalt forankret i Aarhus</div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">Vores ydelser</div>
+  <h2>Alt inden for<br>blikkenslagerarbejde</h2>
+  <p class="section-sub">Vi løser alle opgaver — store som små — med samme omhu og professionalisme.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <h3>Tagarbejde & tagrenovering</h3>
+      <p>Professionelt udført tagarbejde med de rigtige materialer og teknikker. Vi giver garanti på vores arbejde.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌧️</div>
+      <h3>Tagrender & nedløbsrør</h3>
+      <p>Hurtig udrykning og præcis diagnosticering. Vi løser problemet første gang — uden unødvendige genbesøg.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔩</div>
+      <h3>Inddækninger & kviste</h3>
+      <p>Fra idé til færdigt resultat. Vi rådgiver dig og finder den løsning der passer bedst til dine behov og budget.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✨</div>
+      <h3>Zink- & kobberarbejde</h3>
+      <p>Vi arbejder hurtigt og effektivt med zink og kobber, så du ikke venter længere end nødvendigt. Din tid er vigtig for os.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔧</div>
+      <h3>Akut udbedring af lækager</h3>
+      <p>Regelmæssig vedligeholdelse og akut udbedring forlænger levetiden og sparer dig for dyre reparationer på lang sigt.</p>
+    </div>
+    <div class="service-card" style="background: var(--accent); border-color: var(--accent);">
+      <div class="service-icon">💬</div>
+      <h3 style="color:white;">Usikker på hvad du har brug for?</h3>
+      <p style="color:rgba(255,255,255,0.8);">Ring eller skriv til os — vi giver dig et ærligt svar uden forpligtelse.</p>
+      <div style="margin-top:16px; background:white; color:var(--accent); padding:10px 16px; border-radius:6px; font-weight:700; font-size:0.9rem; text-align:center; cursor:pointer;">
+        Kontakt os gratis →
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="om">
+  <div class="section-label">Hvorfor vælge os</div>
+  <h2>Håndværk du<br>kan regne med</h2>
+
+  <div class="why-grid">
+    <div class="why-stats">
+      <div class="stat-box">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">års erfaring i branchen</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">200+</div>
+        <div class="stat-label">tilfredse kunder</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">5★</div>
+        <div class="stat-label">gennemsnitlig rating</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">&lt; 2t</div>
+        <div class="stat-label">gennemsnitlig svartid</div>
+      </div>
+    </div>
+
+    <div class="why-points">
+      <div class="why-point">
+        <div class="why-point-icon">🎯</div>
+        <div class="why-point-text">
+          <h4>Ingen skjulte priser</h4>
+          <p>Du får et klart tilbud inden vi går i gang. Ingen ubehagelige overraskelser på regningen.</p>
+        </div>
+      </div>
+      <div class="why-point">
+        <div class="why-point-icon">⚡</div>
+        <div class="why-point-text">
+          <h4>Hurtig udrykning</h4>
+          <p>Vi svarer hurtigt og kommer ud til dig så snart som muligt — også ved akutte taglækager.</p>
+        </div>
+      </div>
+      <div class="why-point">
+        <div class="why-point-icon">🔧</div>
+        <div class="why-point-text">
+          <h4>Garanti på arbejdet</h4>
+          <p>Vi står inde for det vi laver. Hvis noget ikke er i orden, kommer vi tilbage og retter det.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="anmeldelser">
+  <div class="section-label">Anmeldelser</div>
+  <h2>Hvad vores kunder siger</h2>
+
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Utrolig god service. De kom hurtigt, var grundige og prisen var fair. Kan varmt anbefales!"</p>
+      <div class="review-author">Morten K.</div>
+      <div class="review-location">Aarhus</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Professionelt arbejde fra start til slut. De ryddede op efter sig og holdt den aftalte pris. Bruger dem igen!"</p>
+      <div class="review-author">Lene H.</div>
+      <div class="review-location">Aarhus omegn</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Super venlige og kompetente folk. Løste problemet samme dag vi ringede. Præcis hvad vi havde brug for."</p>
+      <div class="review-author">Thomas B.</div>
+      <div class="review-location">Aarhus</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="kontakt">
+  <div>
+    <h2>Klar til at komme<br>i <em>gang?</em></h2>
+    <p>Ring eller skriv til os — vi svarer hurtigt og uden forpligtelse.</p>
+  </div>
+  <a href="tel:21683826" class="btn-white">📞 Ring på 21 68 38 26</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Arosblik<span>.</span></div>
+  <div class="footer-contact">
+    Skovvangsvej 26, 8200 Aarhus · <a href="tel:21683826">21 68 38 26</a>
+  </div>
+  <div style="font-size:0.8rem; color:var(--ink-light);">Arosblik ApS · Aarhus</div>
+</footer>
+
+</body>
+</html>
